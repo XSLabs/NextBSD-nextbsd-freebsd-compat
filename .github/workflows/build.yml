@@ -179,7 +179,7 @@ jobs:
           files: |
             out/*.tar.gz
 
-      - name: Trigger downstream builds (nextbsd ISO, nextbsd-contrib, nextbsd-userland)
+      - name: Trigger downstream builds (nextbsd-contrib, nextbsd-userland)
         if: github.event_name == 'repository_dispatch'
         env:
           GH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
@@ -188,13 +188,14 @@ jobs:
           # The base artifact is already published by now, so a downstream
           # repo we cannot reach must not mark this build failed. Each
           # dispatch reports on its own and a miss becomes a warning.
-          # nextbsd-userland has listened for base-updated since it was
-          # written -- its workflow says so and its README names this repo as
-          # the trigger -- but this step only ever dispatched the ISO, so that
-          # listener has never fired. It cross-builds against this base and
-          # this build strips paths from its published tarball, so it is the
-          # one that most needs to rebuild when the base moves.
-          for repo in nextbsd/nextbsd nextbsd/nextbsd-contrib nextbsd/nextbsd-userland; do
+          # T11 (nextbsd-ci#13): nextbsd/nextbsd is no longer in this loop --
+          # the ISO/IMG builder is expensive and its components are gated
+          # upstream, so it no longer auto-rebuilds on a base refresh (it
+          # builds on push/PR/workflow_dispatch only).
+          # nextbsd-userland listens for base-updated and cross-builds against
+          # this base, so it is the one that most needs to rebuild when the
+          # base moves.
+          for repo in nextbsd/nextbsd-contrib nextbsd/nextbsd-userland; do
             if gh api "repos/$repo/dispatches" \
                  -f event_type=base-updated \
                  -f "client_payload[fbsd_sha]=$SHA"; then
