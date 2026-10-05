@@ -15,7 +15,7 @@ ARCH="${ARCH:?set ARCH (amd64|arm64)}"
 SELFDIR="$(cd "$(dirname "$0")" && pwd)"
 ALLOWLIST="${ALLOWLIST:-$SELFDIR/collisions}"
 # NextBSD-userland publishes its file set as the continuous release tarball.
-UL_URL="${UL_URL:-https://github.com/nextbsd-redux/nextbsd-userland/releases/download/continuous/nextbsd-userland-${ARCH}.tar.gz}"
+UL_URL="${UL_URL:-https://github.com/nextbsd/nextbsd-userland/releases/download/continuous/nextbsd-userland-${ARCH}.tar.gz}"
 
 tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT
 [ -d "$STAGE" ]     || { echo "FATAL: stage dir $STAGE missing" >&2; exit 2; }

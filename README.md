@@ -9,13 +9,13 @@ This supplies the FreeBSD-provided half of the OS — `libc`/rtld and the shared
 libraries, PAM, `login`/`su`/`passwd`, the POSIX command suites, the UFS/GEOM
 family, `pw`, `ldconfig`/`ldd`, etc. The Apple/Darwin half (Mach, launchd,
 libdispatch, CoreFoundation, configd, IOKit, kextd, daemons) is built separately
-in [`nextbsd-userland`](https://github.com/nextbsd-redux/nextbsd-userland).
+in [`nextbsd-userland`](https://github.com/nextbsd/nextbsd-userland).
 
 ## What it builds
 
 A full **`buildworld`** (`.github/workflows/build.yml`), cross-built for both
 `amd64` and `arm64` on an x86 runner inside the per-arch
-[`nextbsd-kernel-toolchain`](https://github.com/nextbsd-redux/nextbsd-kernel-toolchain)
+[`nextbsd-kernel-toolchain`](https://github.com/nextbsd/nextbsd-kernel-toolchain)
 container. The world is compiled by an **external ports-llvm19** compiler passed
 via `--cross-bindir`; the base itself ships **no** compiler (see
 [Toolchain](#toolchain)).
@@ -118,8 +118,8 @@ gated on `refs/heads/main`).
 
 ## Related
 
-- Darwin half: [`nextbsd-redux/nextbsd-userland`](https://github.com/nextbsd-redux/nextbsd-userland)
-- Packaging (verbatim repackage): [`nextbsd-redux/nextbsd-pkg`](https://github.com/nextbsd-redux/nextbsd-pkg)
-- Toolchain image: [`nextbsd-redux/nextbsd-kernel-toolchain`](https://github.com/nextbsd-redux/nextbsd-kernel-toolchain)
-- ISO consumer: [`nextbsd-redux/nextbsd`](https://github.com/nextbsd-redux/nextbsd)
+- Darwin half: [`nextbsd/nextbsd-userland`](https://github.com/nextbsd/nextbsd-userland)
+- Packaging (verbatim repackage): [`nextbsd/nextbsd-pkg`](https://github.com/nextbsd/nextbsd-pkg)
+- Toolchain image: [`nextbsd/nextbsd-kernel-toolchain`](https://github.com/nextbsd/nextbsd-kernel-toolchain)
+- ISO consumer: [`nextbsd/nextbsd`](https://github.com/nextbsd/nextbsd)
 - Source build plan: https://pkgdemon.github.io/freebsd-srclist-build-plan.html
